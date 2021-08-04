@@ -18,8 +18,12 @@ namespace Botnanya
         static void Main(string[] args)
         {
             // Loading environment
-            DotNetEnv.Env.Load();
-            string discordToken = DotNetEnv.Env.GetString("DISCORD_TOKEN");
+            string discordToken = System.Environment.GetEnvironmentVariable("DISCORD_TOKEN");
+            if (discordToken == null)
+            {
+                Console.WriteLine($"ERROR: Discord token not given.");
+                return;
+            }
 
             // Bot main
             MainAsync(discordToken).GetAwaiter().GetResult();
@@ -84,7 +88,10 @@ namespace Botnanya
             {
                 foreach (IEventHandler handler in messageCreateHandlers)
                 {
+                    await messageEvent.Message.RespondAsync($"Before handler : {DateTime.Now.Date.ToString()}");
                     handler.OnMessageCreated(discordClient, messageEvent);
+                    await messageEvent.Message.RespondAsync($"After handler : {DateTime.Now.Date.ToString()}");
+                    // TODO: Fix sort of infinite loop
                 }
             };
 
