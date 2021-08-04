@@ -27,7 +27,6 @@ namespace Botnanya.EventHandlers
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="tigger">Message to reply to.</param>
         public CatGifEventHandler()
         {
             this.Trigger = "cat";
@@ -44,12 +43,13 @@ namespace Botnanya.EventHandlers
         {
             if (this.CommandConfiguration.IsCommand(this.Trigger, message.Message.Content.ToLower()))
             {
-                var result = await this._httpClient.GetAsync("https://cataas.com/cat/gif");
+                //var result = await this._httpClient.GetAsync("https://cataas.com/cat/gif");
 
-                if ((int)result.StatusCode == 200)
-                {
-                    await message.Message.RespondAsync("Coming soon.");
-                }
+                //if ((int)result.StatusCode == 200)
+                //{
+                //    await message.Message.RespondAsync("Coming soon.");
+                //}
+                await message.Message.RespondAsync("Comming soon");
             }
         }
 

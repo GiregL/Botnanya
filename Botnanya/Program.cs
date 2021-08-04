@@ -7,6 +7,7 @@ using Botnanya.EventHandlers;
 using Botnanya.Commands;
 using System.Linq;
 using System.Reflection;
+using DSharpPlus.CommandsNext;
 
 namespace Botnanya
 {
@@ -82,18 +83,11 @@ namespace Botnanya
                 Intents = DiscordIntents.AllUnprivileged
             });
 
-            var messageCreateHandlers = MessageCreateEventHandlers();
+            var commands = discord.UseCommandsNext(new CommandsNextConfiguration {
+                StringPrefixes = new[] {"$"}
+            });
 
-            discord.MessageCreated += async (discordClient, messageEvent) =>
-            {
-                foreach (IEventHandler handler in messageCreateHandlers)
-                {
-                    await messageEvent.Message.RespondAsync($"Before handler : {DateTime.Now.Date.ToString()}");
-                    handler.OnMessageCreated(discordClient, messageEvent);
-                    await messageEvent.Message.RespondAsync($"After handler : {DateTime.Now.Date.ToString()}");
-                    // TODO: Fix sort of infinite loop
-                }
-            };
+            commands.RegisterCommands<PurgeCommand>();
 
             await discord.ConnectAsync();
             await Task.Delay(-1);
