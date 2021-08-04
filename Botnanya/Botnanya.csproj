@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="DSharpPlus" />
+    <None Remove="DSharpPlus.CommandsNext" />
+    <None Remove="Microsoft.Extensions.Configuration.EnvironmentVariables" />
+    <None Remove="Microsoft.Extensions.Configuration.Abstractions" />
+    <None Remove="Microsoft.Extensions.Hosting" />
+    <None Remove="EventHandlers\" />
+    <None Remove="Command\" />
+    <None Remove="DotNetEnv" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DSharpPlus" Version="4.0.1" />
+    <PackageReference Include="DSharpPlus.CommandsNext" Version="4.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="DotNetEnv" Version="2.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EventHandlers\" />
+    <Folder Include="Commands\" />
+  </ItemGroup>
+</Project>
